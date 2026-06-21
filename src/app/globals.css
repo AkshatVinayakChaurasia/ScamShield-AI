@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+/* ===================================================================
+   ScamShield AI v2 — Design Tokens
+   Premium cybersecurity SaaS aesthetic: Linear + Vercel + Arc Browser
+   =================================================================== */
+
+:root {
+  --ink: #0b1220;
+  --ink-raised: #111a2e;
+  --ink-hover: #162038;
+  --paper: #f6f5f1;
+  --wire: #27344a;
+  --wire-soft: #1c2740;
+  --signal: #3ddc97;
+  --signal-dim: rgba(61, 220, 151, 0.12);
+  --amber: #f5a623;
+  --amber-dim: rgba(245, 166, 35, 0.12);
+  --alarm: #ff5c5c;
+  --alarm-dim: rgba(255, 92, 92, 0.12);
+  --text-primary: #f6f5f1;
+  --text-muted: #93a1b8;
+  --text-dim: #5a6a82;
+  --background: var(--ink);
+  --foreground: var(--text-primary);
+  --glow-signal: 0 0 40px rgba(61, 220, 151, 0.08);
+  --glow-alarm: 0 0 40px rgba(255, 92, 92, 0.08);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-hover: var(--ink-hover);
+  --color-paper: var(--paper);
+  --color-wire: var(--wire);
+  --color-wire-soft: var(--wire-soft);
+  --color-signal: var(--signal);
+  --color-signal-dim: var(--signal-dim);
+  --color-amber: var(--amber);
+  --color-amber-dim: var(--amber-dim);
+  --color-alarm: var(--alarm);
+  --color-alarm-dim: var(--alarm-dim);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scan-line diagnostic effect */
+.scan-lines {
+  position: relative;
+  overflow: hidden;
+}
+.scan-lines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(61, 220, 151, 0.035) 0px,
+    rgba(61, 220, 151, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  animation: scan-drift 9s linear infinite;
+}
+
+@keyframes scan-drift {
+  from { background-position: 0 0; }
+  to { background-position: 0 120px; }
+}
+
+/* Liquid glass card effect */
+.glass-card {
+  background: rgba(17, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(39, 52, 74, 0.6);
+}
+
+/* Subtle gradient glow behind hero sections */
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(61, 220, 151, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Animated pulse ring */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Score gauge animation */
+@keyframes gauge-fill {
+  from { stroke-dasharray: 0 251.33; }
+}
+.gauge-animate {
+  animation: gauge-fill 1s ease-out forwards;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--wire); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-lines::before,
+  .pulse-ring { animation: none; }
+}

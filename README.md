@@ -1,99 +1,38 @@
-# ScamShield AI
+# ScamShield AI — Frontend
 
-**Detect scams before they detect you.**
+Next.js (App Router) + Tailwind CSS frontend for ScamShield AI.
 
-Built for Elevate 2026 — Cybersecurity + Artificial Intelligence theme.
-
-## What it does
-
-ScamShield AI analyzes text messages, URLs, and screenshots to detect scams,
-phishing attempts, fake job offers, and fraudulent payment requests. It combines
-fast rule-based heuristics with LLM-based reasoning (Claude) to return a scam
-score, category, risk level, and human-readable reasons.
-
-## Architecture
-
-```
-User Input (Next.js Frontend)
-        |
-        v
-Express Backend (routing, validation, OCR upload handling)
-        |
-        v
-FastAPI AI Service (rule-based engine + Claude LLM analysis)
-        |
-        v
-JSON result -> back to frontend
-```
-
-## Services
-
-| Service              | Stack                  | Port  |
-|----------------------|-------------------------|-------|
-| scamshield-frontend   | Next.js (App Router) + Tailwind | 3000 |
-| scamshield-backend    | Node.js + Express        | 5000 |
-| scamshield-ai         | Python + FastAPI         | 8000 |
-
-## Local Development
-
-Each service runs independently. Start all three in separate terminals:
+## Run locally
 
 ```bash
-# Terminal 1 — AI service
-cd scamshield-ai
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-
-# Terminal 2 — Backend
-cd scamshield-backend
-npm install
-npm run dev
-
-# Terminal 3 — Frontend
-cd scamshield-frontend
 npm install
 npm run dev
 ```
 
-Frontend will be available at http://localhost:3000
+Visit http://localhost:3000
 
-### ⚠️ System dependency: Tesseract OCR
+## Environment variables
 
-The screenshot analysis feature shells out to the **system Tesseract binary**
-(via Node's `execFile`, not a vulnerable npm wrapper — see
-`scamshield-backend/services/ocrService.js` for why). This means Tesseract
-must be installed on whatever machine runs `scamshield-backend`:
+Copy `.env.example` to `.env.local` and set:
 
-```bash
-# Ubuntu / Debian (including most Render runtimes)
-sudo apt-get update && sudo apt-get install -y tesseract-ocr
-
-# macOS
-brew install tesseract
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
 ```
 
-**On Render specifically:** add a build command that installs `tesseract-ocr`
-before `npm install`, or use a Docker-based Render service with Tesseract
-baked into the image. Without this, `/api/analyze-screenshot` will return a
-502 error ("Tesseract OCR is not installed on this server").
+## Structure
 
-## Environment Variables
+```
+src/
+├── app/
+│   ├── page.js                  # Home page
+│   ├── analyze-text/page.js     # Text scam detection
+│   ├── analyze-url/page.js      # URL scam detection
+│   ├── upload-screenshot/page.js # Screenshot scam detection
+│   ├── reports/page.js          # Community reports
+│   ├── learn/page.js            # Scam education hub
+├── components/                  # Reusable UI components
+├── services/                    # API client (api.js)
+├── utils/                       # Validators, helpers
+```
 
-See `.env.example` in each service folder.
-
-## Build Phases
-
-1. Frontend UI structure
-2. Text analysis API
-3. URL analysis API
-4. Screenshot OCR pipeline
-5. Reports page
-6. Learn page
-
-## Deployment
-
-- Frontend → Vercel
-- Backend → Render
-- AI service → Render
+See the root `README.md` for full project architecture.
