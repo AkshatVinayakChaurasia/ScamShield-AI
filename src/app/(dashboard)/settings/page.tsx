@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Settings, Cpu, Zap, Shield, Moon, Sun, Monitor, User, Info } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { Settings, Cpu, Zap, Shield, User, Info } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const fadeUp = {
@@ -42,38 +40,6 @@ function Row({ label, value, mono, badge }: { label: string; value: string; mono
           {value}
         </span>
       </div>
-    </div>
-  );
-}
-
-function ThemeSelector() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="skeleton h-11 rounded-xl w-full" />;
-
-  const opts = [
-    { value: "dark",  label: "Dark Mode",  icon: Moon  },
-    { value: "light", label: "Light Mode", icon: Sun   },
-  ];
-
-  return (
-    <div className="flex gap-3">
-      {opts.map(({ value, label, icon: Icon }) => (
-        <button
-          key={value}
-          id={`theme-${value}`}
-          onClick={() => setTheme(value)}
-          className={`flex flex-1 items-center justify-center gap-2.5 rounded-xl border py-3 text-[13px] font-medium transition-all ${
-            theme === value
-              ? "border-[var(--accent)] bg-[var(--accent-dim)] text-[var(--accent)]"
-              : "border-[var(--border)] text-[var(--text-muted)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
-          }`}
-        >
-          <Icon className="h-4 w-4" strokeWidth={1.75} />
-          {label}
-        </button>
-      ))}
     </div>
   );
 }
@@ -117,16 +83,6 @@ export default function SettingsPage() {
             <span className="ml-auto rounded-full border border-[var(--green)] bg-[var(--green-dim)] px-2.5 py-0.5 text-[10px] font-semibold text-[var(--green)]">
               Active
             </span>
-          </div>
-        </SettingsSection>
-      </motion.div>
-
-      {/* Appearance */}
-      <motion.div variants={fadeUp}>
-        <SettingsSection title="Appearance" icon={Monitor}>
-          <div>
-            <p className="mb-3 text-[13px] text-[var(--text-muted)]">Choose your preferred display theme.</p>
-            <ThemeSelector />
           </div>
         </SettingsSection>
       </motion.div>

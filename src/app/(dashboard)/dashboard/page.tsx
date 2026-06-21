@@ -53,7 +53,7 @@ function SecurityGauge({ score }: { score: number }) {
       <div className="relative flex items-center justify-center" style={{ width: 140, height: 140 }}>
         <svg width={140} height={140} viewBox="0 0 140 140" className="-rotate-90">
           {/* Track */}
-          <circle cx={70} cy={70} r={R} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={10} />
+          <circle cx={70} cy={70} r={R} fill="none" stroke="var(--border)" strokeWidth={10} />
           {/* Fill */}
           <motion.circle
             cx={70} cy={70} r={R}
@@ -169,10 +169,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export default function DashboardPage() {
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(() => typeof window !== "undefined");
 
   useEffect(() => {
-    setMounted(true);
     api.getDashboardStats()
       .then((d) => setStats(d))
       .catch(() => {})
@@ -223,7 +222,7 @@ export default function DashboardPage() {
         <Link
           id="new-scan-btn"
           href="/scanner"
-          className="btn-scan flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+          className="btn-scan flex min-h-11 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-white shadow-lg"
         >
           <ScanSearch className="h-4 w-4" />
           New Scan
@@ -233,7 +232,7 @@ export default function DashboardPage() {
       {/* -- Empty State (no scans yet) ------------------------------------- */}
       {s.total_scans === 0 && (
         <motion.div variants={fadeUp}>
-          <div className="glass-card flex flex-col items-center gap-6 py-16 text-center px-8">
+          <div className="glass-card flex flex-col items-center gap-6 px-8 py-14 text-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--accent-dim)]">
               <ScanSearch className="h-8 w-8 text-[var(--accent)]" strokeWidth={1.5} />
             </div>
@@ -245,7 +244,7 @@ export default function DashboardPage() {
             </div>
             <Link
               href="/scanner"
-              className="btn-scan flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-lg"
+              className="btn-scan flex min-h-11 items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white shadow-lg"
             >
               <ScanSearch className="h-4 w-4" />
               Go to Scanner
@@ -320,7 +319,7 @@ export default function DashboardPage() {
                     axisLine={false} tickLine={false}
                   />
                   <YAxis hide />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.02)" }} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: "var(--bg-hover)" }} />
                   <Bar dataKey="count" fill="url(#barGrad)" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -329,7 +328,7 @@ export default function DashboardPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--bg-hover)]">
                   <Activity className="h-6 w-6 text-[var(--text-muted)]" strokeWidth={1.5} />
                 </div>
-                <p className="text-sm text-[var(--text-muted)]">No activity yet</p>
+                <p className="text-sm text-[var(--text-secondary)]">No activity yet</p>
                 <Link href="/scanner" className="text-xs font-medium text-[var(--accent)] hover:underline">
                   Run your first scan →
                 </Link>
@@ -423,7 +422,7 @@ export default function DashboardPage() {
               <p className="mt-1 text-xs text-[var(--text-muted)]">Run your first scan to see results here</p>
               <Link
                 href="/scanner"
-                className="btn-scan mt-5 rounded-xl px-5 py-2.5 text-sm font-semibold text-white"
+                className="btn-scan mt-5 min-h-11 rounded-xl px-5 py-2.5 text-sm font-medium text-white"
               >
                 Run your first scan
               </Link>

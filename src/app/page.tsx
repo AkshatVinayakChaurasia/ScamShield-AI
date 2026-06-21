@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   Shield, ScanSearch, Link2, ImageUp, FileText, MessageSquare,
   Mail, ArrowRight, ShieldCheck, Zap, Lock, BarChart3,
@@ -77,7 +78,7 @@ function Navbar() {
         <div className="flex items-center gap-3">
           <div className="relative flex h-8 w-8 items-center justify-center">
             <div className="absolute inset-0 rounded-xl bg-[var(--accent-dim)]" />
-            <div className="absolute inset-0 rounded-xl opacity-50 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] blur-[6px]" />
+            <div className="absolute inset-0 rounded-xl opacity-35 bg-gradient-to-br from-[#3B82F6] to-[#6366F1] blur-[6px]" />
             <Shield className="relative h-4 w-4 text-[var(--accent)]" strokeWidth={2} />
           </div>
           <span className="text-[15px] font-semibold tracking-tight text-[var(--text-primary)]">
@@ -89,13 +90,14 @@ function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/login"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
+            className="rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
           >
             Sign In
           </Link>
+          <ThemeToggle />
           <Link
-            href="/signup"
-            className="btn-scan rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+            href="/scanner"
+            className="btn-scan rounded-xl px-5 py-2.5 text-sm font-medium text-white shadow-lg"
           >
             Get Started
           </Link>
@@ -108,15 +110,13 @@ function Navbar() {
 /* -- Hero Section ------------------------------------------------------------ */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-center justify-center pt-16">
+    <section className="relative min-h-[92vh] overflow-hidden flex items-center justify-center pt-16">
       {/* Ambient glow layers */}
       <div className="hero-gradient absolute inset-0 pointer-events-none" />
-      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full opacity-[0.04] bg-[var(--accent)] blur-[80px]" />
-
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center lg:px-8">
         <motion.div initial="hidden" animate="visible" variants={stagger}>
           {/* Badge */}
-          <motion.div variants={fadeUp} className="mb-10 inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-[var(--bg-surface)]/80 px-5 py-2 backdrop-blur-sm">
+          <motion.div variants={fadeUp} className="mb-9 inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-[var(--bg-surface)]/80 px-5 py-2 backdrop-blur-sm">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="pulse-ring absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent)]" />
@@ -127,17 +127,17 @@ function HeroSection() {
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
-            className="text-5xl font-bold leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-6xl lg:text-7xl xl:text-[80px]"
+            className="text-5xl font-bold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-6xl lg:text-[68px] xl:text-[72px]"
           >
             Detect scams before<br />
-            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#3B82F6] to-[#6366F1] bg-clip-text text-transparent">
               they detect you.
             </span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-[var(--text-muted)] sm:text-xl"
+            className="mx-auto mt-6 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg"
           >
             AI-powered fraud detection in seconds. Protect yourself from phishing,
             scams, and digital threats across messages, links, and documents.
@@ -146,15 +146,15 @@ function HeroSection() {
           {/* CTAs */}
           <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="/signup"
-              className="btn-scan flex items-center gap-2.5 rounded-2xl px-8 py-4 text-[15px] font-semibold text-white shadow-xl glow-blue"
+              href="/scanner"
+              className="btn-scan flex items-center gap-2.5 rounded-2xl px-8 py-4 text-[15px] font-medium text-white shadow-xl glow-blue"
             >
               Start for free
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/login"
-              className="glass flex items-center gap-2.5 rounded-2xl px-8 py-4 text-[15px] font-medium text-[var(--text-secondary)] transition-all hover:text-[var(--text-primary)]"
+              className="glass flex items-center gap-2.5 rounded-2xl px-8 py-4 text-[15px] font-medium text-[var(--text-secondary)] transition-all hover:-translate-y-px hover:text-[var(--text-primary)]"
             >
               Sign In
             </Link>
@@ -163,7 +163,7 @@ function HeroSection() {
           {/* Social proof */}
           <motion.div variants={fadeUp} className="mt-12 flex items-center justify-center gap-6 text-sm text-[var(--text-muted)]">
             <span className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[var(--green)]" />
+              <ShieldCheck className="h-4 w-4 text-[var(--accent)]" />
               No credit card
             </span>
             <span className="h-1 w-1 rounded-full bg-[var(--border)]" />
@@ -173,7 +173,7 @@ function HeroSection() {
             </span>
             <span className="h-1 w-1 rounded-full bg-[var(--border)]" />
             <span className="flex items-center gap-2">
-              <Zap className="h-4 w-4 text-[var(--cyan)]" />
+              <Zap className="h-4 w-4 text-[var(--indigo)]" />
               {"< 2s analysis"}
             </span>
           </motion.div>
@@ -185,9 +185,9 @@ function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <ChevronDown className="h-5 w-5 animate-bounce text-[var(--text-muted)]" />
+        <ChevronDown className="h-5 w-5 text-[var(--text-muted)]" />
       </motion.div>
     </section>
   );
@@ -365,11 +365,11 @@ function HowItWorksSection() {
 /* -- Why ScamShield ---------------------------------------------------------- */
 const PILLARS = [
   { icon: Zap,          title: "Instant Analysis",      desc: "Results in under 2 seconds. No waiting, no queues.",           color: "#F59E0B" },
-  { icon: Lock,         title: "Privacy First",         desc: "Nothing is stored. Your data never leaves your session.",      color: "#10B981" },
+  { icon: Lock,         title: "Privacy First",         desc: "Nothing is stored. Your data never leaves your session.",      color: "#3B82F6" },
   { icon: Brain,        title: "Hybrid AI Engine",      desc: "Gemini AI + rule-based engine for maximum detection accuracy.", color: "#3B82F6" },
-  { icon: BarChart3,    title: "Detailed Reports",      desc: "Risk score, confidence, reasons, and actionable recommendations.", color: "#06B6D4" },
+  { icon: BarChart3,    title: "Detailed Reports",      desc: "Risk score, confidence, reasons, and actionable recommendations.", color: "#0EA5E9" },
   { icon: AlertTriangle,title: "Multi-vector Coverage", desc: "Text, URL, image, email, chat, and documents all in one tool.", color: "#EF4444" },
-  { icon: CheckCircle2, title: "No False Positives",    desc: "Tuned for accuracy — honest about what it doesn't know.",      color: "#8B5CF6" },
+  { icon: CheckCircle2, title: "No False Positives",    desc: "Tuned for accuracy — honest about what it doesn't know.",      color: "#6366F1" },
 ];
 
 function WhySection() {
@@ -419,10 +419,6 @@ function CTASection() {
         transition={{ duration: 0.6 }}
         className="relative glass-card overflow-hidden p-12 text-center sm:p-20"
       >
-        {/* Ambient orbs */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-48 w-48 rounded-full bg-[var(--accent)] opacity-10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 right-1/4 h-48 w-48 rounded-full bg-[var(--cyan)] opacity-08 blur-3xl" />
-
         <div className="relative">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent-dim)]">
             <Shield className="h-7 w-7 text-[var(--accent)]" />
@@ -434,8 +430,8 @@ function CTASection() {
             Start scanning in seconds. No credit card required.
           </p>
           <Link
-            href="/signup"
-            className="btn-scan mt-10 inline-flex items-center gap-2.5 rounded-2xl px-10 py-4 text-[15px] font-semibold text-white shadow-xl glow-blue"
+            href="/scanner"
+            className="btn-scan mt-10 inline-flex items-center gap-2.5 rounded-2xl px-10 py-4 text-[15px] font-medium text-white shadow-xl glow-blue"
           >
             Get Started — It&apos;s Free
             <ArrowRight className="h-4 w-4" />
@@ -465,7 +461,7 @@ const TEAM = [
     role: "Co-Founder & Full-Stack Developer",
     initial: "H",
     bio: "Passionate about building intelligent systems and creating technology that solves real-world security challenges.",
-    color: "#8B5CF6",
+    color: "#6366F1",
     links: {
       github: "https://github.com/ranaharshita",
       linkedin: "https://www.linkedin.com/in/ranaharshita/",
@@ -586,7 +582,7 @@ function Footer() {
         </p>
         <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
           <Link href="/login" className="hover:text-[var(--text-primary)] transition-colors">Sign In</Link>
-          <Link href="/signup" className="hover:text-[var(--text-primary)] transition-colors">Get Started</Link>
+          <Link href="/scanner" className="hover:text-[var(--text-primary)] transition-colors">Get Started</Link>
         </div>
       </div>
     </footer>

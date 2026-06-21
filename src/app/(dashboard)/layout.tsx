@@ -6,11 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield, LayoutDashboard, ScanSearch, History,
   BarChart3, BookOpen, FileText, Settings,
-  LogOut, Menu, X, Sun, Moon,
+  LogOut, Menu, X,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
+import { useState } from "react";
 
 const NAV_MAIN = [
   { href: "/scanner",   label: "Scan",       icon: ScanSearch,     primary: true },
@@ -24,25 +24,6 @@ const NAV_SECONDARY = [
   { href: "/reports",  label: "Reports",  icon: FileText },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="h-8 w-8" />;
-  return (
-    <button
-      id="theme-toggle"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="flex h-8 w-8 items-center justify-center rounded-lg text-[var(--text-muted)] transition-all hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
-      aria-label="Toggle theme"
-    >
-      {theme === "dark"
-        ? <Sun className="h-3.5 w-3.5" />
-        : <Moon className="h-3.5 w-3.5" />}
-    </button>
-  );
-}
 
 function NavItem({ href, label, icon: Icon, onClick, primary }: {
   href: string; label: string; icon: React.ElementType; onClick?: () => void; primary?: boolean;
@@ -102,7 +83,7 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
         <Link href="/dashboard" className="flex items-center gap-3">
           <div className="relative flex h-9 w-9 items-center justify-center">
             <div className="absolute inset-0 rounded-xl bg-[var(--accent-dim)]" />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] opacity-40 blur-[6px]" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#6366F1] opacity-35 blur-[6px]" />
             <Shield className="relative h-4.5 w-4.5 text-[var(--accent)]" strokeWidth={2.5} />
           </div>
           <div>
@@ -174,7 +155,7 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
 
         {/* Controls row */}
         <div className="mt-1 flex items-center gap-1 px-1">
-          <ThemeToggle />
+          <ThemeToggle className="lg:hidden" />
           <button
             id="sign-out-btn"
             onClick={signOut}
@@ -192,8 +173,6 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  useEffect(() => setSidebarOpen(false), [pathname]);
 
   return (
     <div className="flex h-screen overflow-hidden bg-[var(--bg)]">
@@ -235,7 +214,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </AnimatePresence>
 
       {/* Main */}
-      <div className="flex flex-1 flex-col min-w-0 overflow-hidden">
+      <div className="relative flex flex-1 flex-col min-w-0 overflow-hidden">
 
         {/* Mobile topbar */}
         <header className="flex h-14 shrink-0 items-center gap-3 border-b border-[var(--border)] bg-[var(--glass-bg)] backdrop-blur-xl px-4 lg:hidden">
@@ -252,13 +231,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               ScamShield AI
             </span>
           </div>
-          <div className="ml-auto">
-            <ThemeToggle />
-          </div>
         </header>
 
         {/* Page content */}
         <main className="flex-1 overflow-y-auto">
+          <div className="pointer-events-none sticky top-0 z-20 hidden h-0 justify-end px-6 pt-4 lg:flex">
+            <div className="pointer-events-auto">
+              <ThemeToggle />
+            </div>
+          </div>
           <motion.div
             key={pathname}
             initial={{ opacity: 0, y: 8 }}

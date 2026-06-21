@@ -55,7 +55,7 @@ function RiskGauge({ score, risk }: { score: number; risk: string }) {
           {/* Track */}
           <path
             d={`M 14 62 A ${R} ${R} 0 0 1 106 62`}
-            fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth={10} strokeLinecap="round"
+            fill="none" stroke="var(--border)" strokeWidth={10} strokeLinecap="round"
           />
           {/* Fill */}
           <motion.path
@@ -160,8 +160,8 @@ function ScanResultCard({ result, extractedText }: { result: any; extractedText?
       </div>
 
       {/* Body */}
-      <div className="p-7">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-10">
+      <div className="p-6 sm:p-7">
+        <div className="flex flex-col gap-7 sm:flex-row sm:items-start sm:gap-10">
           {/* Gauge */}
           <div className="shrink-0 flex justify-center sm:justify-start">
             <RiskGauge score={score} risk={risk} />
@@ -174,11 +174,11 @@ function ScanResultCard({ result, extractedText }: { result: any; extractedText?
 
             {/* AI Explanation */}
             {explanation && (
-              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-hover)] p-4">
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)]/60 p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-[var(--text-muted)] mb-2">
                   AI Analysis
                 </p>
-                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{explanation}</p>
+                <p className="text-sm leading-7 text-[var(--text-secondary)]">{explanation}</p>
               </div>
             )}
 
@@ -190,7 +190,7 @@ function ScanResultCard({ result, extractedText }: { result: any; extractedText?
                 </p>
                 <ul className="space-y-2">
                   {reasons.map((r: string, i: number) => (
-                    <li key={i} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
+                    <li key={i} className="flex items-start gap-3 text-sm leading-6 text-[var(--text-secondary)]">
                       <span
                         className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
                         style={{ background: verdict.color }}
@@ -282,7 +282,7 @@ const LOADING_STEPS_TEXT: Record<string, string[]> = {
   DOCUMENT:   ["Reading document...", "Extracting content...", "Running threat analysis...", "Generating recommendations..."],
 };
 
-function LoadingCard({ step, total }: { step: number; total: number }) {
+function LoadingCard({ step, total, message }: { step: number; total: number; message: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -303,7 +303,7 @@ function LoadingCard({ step, total }: { step: number; total: number }) {
         </div>
         <div>
           <p className="text-sm font-semibold text-[var(--text-primary)]">Analyzing content</p>
-          <p className="mt-1 text-[13px] text-[var(--text-muted)]">AI is processing your input</p>
+          <p className="mt-1 text-[13px] text-[var(--text-secondary)]">{message || "AI is processing your input"}</p>
         </div>
         {/* Step progress */}
         <div className="w-full max-w-xs space-y-2">
@@ -407,7 +407,7 @@ export default function ScannerPage() {
         <h1 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
           Detect scams before they detect you.
         </h1>
-        <p className="mt-1.5 text-sm text-[var(--text-muted)]">
+        <p className="mt-1.5 text-sm leading-6 text-[var(--text-secondary)]">
           AI-powered fraud analysis in seconds — messages, links, screenshots, emails, documents.
         </p>
       </div>
@@ -441,7 +441,7 @@ export default function ScannerPage() {
         </div>
 
         {/* Input area */}
-        <div className="p-5">
+        <div className="p-5 sm:p-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -456,7 +456,7 @@ export default function ScannerPage() {
                   onDragLeave={() => setDragOver(false)}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`flex cursor-pointer flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed py-14 transition-all duration-200 ${
+                  className={`flex min-h-64 cursor-pointer flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed px-5 py-14 transition-all duration-200 ${
                     dragOver
                       ? "border-[var(--accent)] bg-[var(--accent-dim)]"
                       : file
@@ -510,8 +510,8 @@ export default function ScannerPage() {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder={tab.placeholder}
-                  rows={7}
-                  className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--bg-hover)]/40 px-4 py-3.5 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] leading-relaxed focus:border-[var(--accent-mid)] transition-colors"
+                  rows={8}
+                  className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--bg-surface)]/55 px-4 py-4 text-sm leading-7 text-[var(--text-primary)] outline-none transition-colors placeholder:text-[var(--text-muted)] focus:border-[var(--accent-mid)] focus:bg-[var(--bg-raised)]"
                 />
               )}
             </motion.div>
@@ -523,7 +523,7 @@ export default function ScannerPage() {
               id="scan-submit-btn"
               onClick={handleScan}
               disabled={!canScan || loading}
-              className="btn-scan flex items-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-semibold text-white shadow-lg disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed disabled:transform-none"
+              className="btn-scan flex min-h-12 items-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-medium text-white shadow-lg disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none disabled:transform-none"
             >
               {loading ? (
                 <>
@@ -541,7 +541,7 @@ export default function ScannerPage() {
             {(inputText || file) && !loading && (
               <button
                 onClick={() => { setInputText(""); setFile(null); setResult(null); setError(""); }}
-                className="rounded-xl border border-[var(--border)] px-4 py-3.5 text-sm font-medium text-[var(--text-muted)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-all"
+                className="min-h-12 rounded-xl border border-[var(--border)] px-4 py-3.5 text-sm font-medium text-[var(--text-secondary)] transition-all hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
               >
                 Clear
               </button>
@@ -572,6 +572,7 @@ export default function ScannerPage() {
             key="loading"
             step={loadingStep}
             total={(LOADING_STEPS_TEXT[activeTab] || LOADING_STEPS_TEXT.TEXT).length}
+            message={loadingMsg}
           />
         ) : result?.scan_result ? (
           <ScanResultCard

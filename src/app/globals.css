@@ -10,21 +10,21 @@
 :root {
   /* Backgrounds */
   --bg:           #020617;
-  --bg-surface:   #07111F;
-  --bg-raised:    #0B1627;
-  --bg-card:      rgba(11, 18, 32, 0.72);
+  --bg-surface:   #081321;
+  --bg-raised:    #0E1A2B;
+  --bg-card:      rgba(14, 26, 43, 0.78);
   --bg-hover:     rgba(255, 255, 255, 0.05);
   --bg-active:    rgba(59, 130, 246, 0.10);
 
   /* Borders */
-  --border:       rgba(255, 255, 255, 0.06);
-  --border-soft:  rgba(255, 255, 255, 0.03);
+  --border:       rgba(226, 232, 240, 0.08);
+  --border-soft:  rgba(226, 232, 240, 0.04);
   --border-focus: rgba(59, 130, 246, 0.50);
 
   /* Text */
   --text-primary:   #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-muted:     #64748B;
+  --text-secondary: #D7DEE9;
+  --text-muted:     #8A98AB;
   --text-faint:     #1E293B;
 
   /* Primary — Blue */
@@ -34,9 +34,9 @@
   --accent-mid:  rgba(59, 130, 246, 0.40);
 
   /* Secondary — Cyan */
-  --cyan:        #06B6D4;
-  --cyan-dim:    rgba(6, 182, 212, 0.12);
-  --cyan-glow:   rgba(6, 182, 212, 0.20);
+  --cyan:        #0EA5E9;
+  --cyan-dim:    rgba(14, 165, 233, 0.12);
+  --cyan-glow:   rgba(14, 165, 233, 0.20);
 
   /* Semantic */
   --green:       #10B981;
@@ -56,37 +56,37 @@
   --foreground:  var(--text-primary);
 
   /* Glassmorphism */
-  --glass-bg:     rgba(11, 18, 32, 0.60);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  --glass-bg:     rgba(14, 26, 43, 0.72);
+  --glass-border: rgba(226, 232, 240, 0.09);
+  --glass-shadow: 0 10px 30px rgba(2, 6, 23, 0.24), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }
 
 /* -- Light Mode --------------------------------------------------------------- */
 .light {
-  --bg:           #F8FAFC;
-  --bg-surface:   #F1F5F9;
+  --bg:           #F5F7FB;
+  --bg-surface:   #EEF2F7;
   --bg-raised:    #FFFFFF;
-  --bg-card:      rgba(255, 255, 255, 0.85);
+  --bg-card:      rgba(255, 255, 255, 0.92);
   --bg-hover:     rgba(15, 23, 42, 0.04);
   --bg-active:    rgba(37, 99, 235, 0.08);
 
-  --border:       rgba(15, 23, 42, 0.08);
-  --border-soft:  rgba(15, 23, 42, 0.04);
+  --border:       rgba(15, 23, 42, 0.10);
+  --border-soft:  rgba(15, 23, 42, 0.06);
   --border-focus: rgba(37, 99, 235, 0.40);
 
-  --text-primary:   #0F172A;
-  --text-secondary: #475569;
-  --text-muted:     #94A3B8;
+  --text-primary:   #111827;
+  --text-secondary: #334155;
+  --text-muted:     #64748B;
   --text-faint:     #E2E8F0;
 
-  --accent:      #2563EB;
-  --accent-dim:  rgba(37, 99, 235, 0.10);
-  --accent-glow: rgba(37, 99, 235, 0.15);
-  --accent-mid:  rgba(37, 99, 235, 0.30);
+  --accent:      #3B82F6;
+  --accent-dim:  rgba(59, 130, 246, 0.10);
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --accent-mid:  rgba(59, 130, 246, 0.30);
 
-  --cyan:        #0891B2;
-  --cyan-dim:    rgba(8, 145, 178, 0.10);
-  --cyan-glow:   rgba(8, 145, 178, 0.15);
+  --cyan:        #0EA5E9;
+  --cyan-dim:    rgba(14, 165, 233, 0.10);
+  --cyan-glow:   rgba(14, 165, 233, 0.15);
 
   --green:       #059669;
   --green-dim:   rgba(5, 150, 105, 0.10);
@@ -95,9 +95,9 @@
   --red:         #DC2626;
   --red-dim:     rgba(220, 38, 38, 0.10);
 
-  --glass-bg:     rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(15, 23, 42, 0.08);
-  --glass-shadow: 0 2px 12px rgba(15, 23, 42, 0.06), 0 1px 0 rgba(255, 255, 255, 0.90) inset;
+  --glass-bg:     rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(15, 23, 42, 0.10);
+  --glass-shadow: 0 12px 32px rgba(15, 23, 42, 0.08), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
 }
 
 /* -- Tailwind Token Bridge ----------------------------------------------------- */
@@ -125,6 +125,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  font-weight: 400;
   transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
 }
@@ -145,17 +146,17 @@ body {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: 16px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  border-color: rgba(226, 232, 240, 0.12);
+  box-shadow: 0 14px 36px rgba(2, 6, 23, 0.28), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 
 .light .glass-card:hover {
   border-color: rgba(15, 23, 42, 0.10);
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
 }
 
 .glass-hover {
@@ -194,18 +195,18 @@ body {
 /* -- Gradient Backgrounds ------------------------------------------------------ */
 .hero-gradient {
   background:
-    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
 }
 
 .light .hero-gradient {
   background:
-    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(37, 99, 235, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(8, 145, 178, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 40% at 50% -5%, rgba(59, 130, 246, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 50%);
 }
 
 .scan-gradient {
-  background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
 }
 
 .card-gradient-blue {
@@ -287,9 +288,9 @@ body {
 }
 
 .btn-scan:hover {
-  opacity: 0.92;
+  opacity: 0.96;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.30);
+  box-shadow: 0 10px 26px rgba(59, 130, 246, 0.26);
 }
 
 .btn-scan:active { transform: translateY(0); opacity: 1; }
@@ -306,8 +307,18 @@ body {
 /* -- Focus Ring ---------------------------------------------------------------- */
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 6px;
+}
+
+.font-semibold,
+.font-extrabold,
+.font-black {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 /* -- Selection ----------------------------------------------------------------- */
