@@ -362,6 +362,15 @@ ScamShield AI helps detect:
 
 ---
 
+## Risk Levels
+
+- Low Risk
+- Medium Risk
+- High Risk
+- Critical Risk
+
+---
+
 # 📜 License
 
 This project is licensed under the MIT License.
