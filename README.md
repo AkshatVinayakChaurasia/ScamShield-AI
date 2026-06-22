@@ -342,6 +342,14 @@ ScamShield AI helps detect:
 
 ---
 
+## Security Awareness Tips
+
+- Never share OTPs
+- Verify links before clicking
+- Avoid unknown attachments
+- Report suspicious activity
+
+---
 
 # 📜 License
 
