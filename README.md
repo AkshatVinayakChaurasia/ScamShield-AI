@@ -311,6 +311,18 @@ Our mission is to help people:
 
 ---
 
+## Threat Categories
+
+ScamShield AI helps detect:
+
+- Phishing Scams
+- UPI Fraud
+- Job Scams
+- Investment Scams
+- Romance Scams
+
+---
+
 # 📜 License
 
 This project is licensed under the MIT License.
