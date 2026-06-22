@@ -14,7 +14,7 @@
 
 # 🌍 Live Demo
 
-🔗 **Website:** [ScamShield](https://scam-shield-ai-eight.vercel.app/)
+🔗 **Website:** [ScamShield Ai](https://scam-shield-ai-eight.vercel.app/)
 
 ---
 
